@@ -6,18 +6,10 @@ function MyNav(props) {
 			name: "Home",
 			link: "/home",
 		},
-		{
-			name: "Your City",
-			link: "/your-city",
-		},
-		{
-			name: "Movies",
-			link: "/movies",
-		},
-		{
-			name: "Recently Added",
-			link: "/recently-added",
-		},
+		// {
+		// 	name: "Your City",
+		// 	link: "/your-city",
+		// },
 	];
 
 	return (

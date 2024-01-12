@@ -1,14 +1,14 @@
 import logo from "./logo.png";
 import "./assets/dist/css/style.min.css";
-import MyNav from "./components/MyNav";
-import ActualMeteo from "./components/MyNav";
+import SearchCity from "./components/SearchCity";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import MyNav from "./components/myNav";
 function App() {
 	return (
 		<BrowserRouter>
 			<MyNav logo={logo} />
 			<Routes>
-				<Route path="/home" element={<ActualMeteo />} />
+				<Route path="/home" element={<SearchCity />} />
 			</Routes>
 		</BrowserRouter>
 	);
