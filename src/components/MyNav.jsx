@@ -4,7 +4,7 @@ function MyNav(props) {
 	const navBarConfig = [
 		{
 			name: "Home",
-			link: "/home",
+			link: "/",
 		},
 		// {
 		// 	name: "Your City",

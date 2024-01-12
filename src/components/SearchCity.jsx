@@ -1,37 +1,42 @@
 import { useEffect, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
-import { token } from "../assets/token";
-import MeteoCard from "./OverviewCard";
 import CardExample from "./CardPlaceholder";
 import OverviewCard from "./OverviewCard";
+import { token } from "../assets/token";
 
 const SearchCity = (props) => {
 	const [searchQuery, setSearchQuery] = useState("");
-	const [data, setData] = useState([]);
-	const endpointByName = `https://api.openweathermap.org/data/2.5/weather?q=${searchQuery},IT&appid=${token}`;
-	// const endpointByID = `https://api.openweathermap.org/data/2.5/weather?id=6167865&appid=${token}`;
-	const fetchData = async () => {
+	const [weather, setWeather] = useState(null);
+
+	const fetchCityData = async () => {
+		const endpoint = `http://api.openweathermap.org/geo/1.0/direct?q=${searchQuery}&limit=5&appid=${token}`;
 		try {
-			const resp = await fetch(endpointByName);
+			const resp = await fetch(endpoint);
 			if (resp.ok) {
 				const response = await resp.json();
-				setData(response);
+				fetchData(response[0].lat, response[0].lon);
+
+				console.log(response);
 			}
 		} catch (error) {
 			console.log(error);
 		}
 	};
-	useEffect(() => {
-		fetchData();
-	}, []);
 
-	useEffect(() => {
-		setTimeout(fetchData, 500);
-	}, [searchQuery]);
+	const fetchData = async (lat, lon) => {
+		const endpoint = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${token}`;
+		try {
+			const resp = await fetch(endpoint);
+			if (resp.ok) {
+				const response = await resp.json();
+				setWeather(response);
+				console.log(response);
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
-	// const changeSelectedBook = (data) => {
-	// 	setData(data);
-	// };
 	return (
 		<Container>
 			<Row>
@@ -43,6 +48,11 @@ const SearchCity = (props) => {
 									type="search"
 									placeholder="Search a location"
 									value={searchQuery}
+									onKeyUp={(e) => {
+										if (e.key === "Enter") {
+											fetchCityData();
+										}
+									}}
 									onChange={(e) =>
 										setSearchQuery(e.target.value)
 									}
@@ -51,38 +61,20 @@ const SearchCity = (props) => {
 						</Col>
 					</Row>
 					<Row className="g-2 mt-3">
-						{console.log(data)}
-						{searchQuery !== "" && data.name !== "Zumpano" ? (
+						{weather ? (
 							<Container>
 								<Row className=" justify-content-center">
-									<OverviewCard
-										// book={b}
-										data={data}
-										// changeSelectedBook={changeSelectedBook}
-									/>
+									<OverviewCard weather={weather} />
 								</Row>
 							</Container>
 						) : (
 							<Container>
-								<Row className=" justify-content-center">
-									{/* <CardExample /> */}
+								<Row className="justify-content-center text-center">
+									{/* <CardExample />
+									<h1>ciao</h1> */}
 								</Row>
 							</Container>
 						)}
-						{/* {props.books
-							.filter((b) =>
-								b.title.toLowerCase().includes(searchQuery)
-							)
-							.map((b) => (
-								<Col xs={12} md={4} key={b.data}>
-									<ActualMeteo
-										book={b}
-										data={data}
-										// changeSelectedBook={changeSelectedBook}
-										city={"Vercelli"}
-									/>
-								</Col>
-							))} */}
 					</Row>
 				</Col>
 			</Row>
