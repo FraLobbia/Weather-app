@@ -20,7 +20,7 @@ function MyNav(props) {
 						src={props.logo}
 						className="App-logo ms-4"
 						alt="logo"
-						style={{ height: "50px" }}
+						style={{ height: "150px" }}
 					/>
 				</Navbar.Brand>
 				<Navbar.Toggle

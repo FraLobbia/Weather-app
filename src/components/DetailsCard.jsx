@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { useParams } from "react-router";
 import { token } from "../assets/token";
-import { Link } from "react-router-dom";
 
 function DetailsCard() {
 	const params = useParams();
@@ -27,8 +25,8 @@ function DetailsCard() {
 
 	useEffect(() => {
 		fetchData(params.lat, params.lon);
-		const city = weather.name;
-		console.log(city);
+		// const city = weather.name;
+		// console.log(city);
 		// const actualTemperature = parseFloat(
 		// 	(weather.main.temp - kelvin).toFixed(1)
 		// );
@@ -37,6 +35,24 @@ function DetailsCard() {
 		// const tempMin = parseFloat((weather.main.temp_min - kelvin).toFixed(1));
 		// const tempMax = parseFloat((weather.main.temp_max - kelvin).toFixed(1));
 	}, []);
+
+	useEffect(() => {
+		// if (weather) {
+		// 	const city = weather.name;
+		// 	console.log(city);
+		// 	const actualTemperature = parseFloat(
+		// 		(weather.main.temp - kelvin).toFixed(1)
+		// 	);
+		// 	const actualMeteo = weather.weather[0].main;
+		// 	const actualMeteoDescription = weather.weather[0].description;
+		// 	const tempMin = parseFloat(
+		// 		(weather.main.temp_min - kelvin).toFixed(1)
+		// 	);
+		// 	const tempMax = parseFloat(
+		// 		(weather.main.temp_max - kelvin).toFixed(1)
+		// 	);
+		// }
+	}, [weather]);
 
 	return (
 		<Container>
@@ -49,28 +65,28 @@ function DetailsCard() {
 								{weather.name}
 							</Card.Title>
 							{/* <Card.Text>
-								<img
-                                src={`http://openweathermap.org/img/w/${weather.weather[0].icon}.png`}
-                                alt="weather icon"
-								/>
-								<p className="m-0 fs-4">{actualMeteo}</p>
-								<p>{actualMeteoDescription}</p>
-								<p className="fs-2">
-                                <span
-                                className="fs-6"
-                                style={{ color: "#0033cc" }}>
-                                {tempMin}°
-                                </span>
-                                <div className="vr mx-2"></div>
-                                {actualTemperature}°
-                                <div className="vr mx-2"></div>
-                                <span
-                                className="fs-6"
-                                style={{ color: "#ff8533" }}>
-                                {tempMax}°
-                                </span>
-								</p>
-							</Card.Text> */}
+									<img
+										src={`http://openweathermap.org/img/w/${weather[0].icon}.png`}
+										alt="weather icon"
+									/>
+									<p className="m-0 fs-4">{actualMeteo}</p>
+									<p>{actualMeteoDescription}</p>
+									<p className="fs-2">
+										<span
+											className="fs-6"
+											style={{ color: "#0033cc" }}>
+											{tempMin}°
+										</span>
+										<div className="vr mx-2"></div>
+										{actualTemperature}°
+										<div className="vr mx-2"></div>
+										<span
+											className="fs-6"
+											style={{ color: "#ff8533" }}>
+											{tempMax}°
+										</span>
+									</p>
+								</Card.Text> */}
 						</Card.Body>
 					</Card>
 				</Col>

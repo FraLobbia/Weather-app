@@ -43,7 +43,7 @@ const OverviewCard = (props) => {
 					<Link
 						to={`/${props.weather.coord.lat}/${props.weather.coord.lon}`}
 						className="btn btn-primary">
-						Dettagli
+						Dettagli prossimi 5 giorni
 					</Link>
 				</Card.Body>
 			</Card>
