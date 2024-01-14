@@ -1,27 +1,31 @@
 import logo from "./logo.png";
 import "./assets/dist/css/style.min.css";
-import SearchCity from "./components/SearchCity";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import MyNav from "./components/myNav";
-import { useEffect, useState } from "react";
-import { token } from "./assets/token";
 import DetailsCard from "./components/DetailsCard";
+import MyNav from "./components/MyNavbar";
+import { useState } from "react";
+import Search from "./components/Search";
+import OverviewCard from "./components/OverviewCard";
+import FiveDayForecast from "./components/FiveDayForecast";
+import Home from "./components/Home";
 function App() {
-	// const [data, setData] = useState(null);
-
-	// useEffect(() => {
-	// 	fetchData();
-	// }, [searchQuery]);
-
-	// useEffect(() => {
-	// 	fetchData();
-	// }, []);
+	const [weather, setWeather] = useState(null);
+	const [forecast, setForecast] = useState(null);
 	return (
 		<BrowserRouter>
 			<MyNav logo={logo} />
+			<Search setWeather={setWeather} setForecast={setForecast} />
 			<Routes>
-				<Route path="/" element={<SearchCity />} />
-				<Route path="/:lat/:lon" element={<DetailsCard />} />
+				<Route
+					path="/"
+					element={
+						<>
+							<Home />
+							{weather && <OverviewCard weather={weather} />}
+						</>
+					}
+				/>
+				<Route path="/:lat/:lon" element={<FiveDayForecast />} />
 			</Routes>
 		</BrowserRouter>
 	);

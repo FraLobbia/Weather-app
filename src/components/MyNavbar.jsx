@@ -1,6 +1,6 @@
 import { Nav, Container, Navbar } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-function MyNav(props) {
+function MyNavbar(props) {
 	const navBarConfig = [
 		{
 			name: "Home",
@@ -51,4 +51,4 @@ function MyNav(props) {
 	);
 }
 
-export default MyNav;
+export default MyNavbar;
