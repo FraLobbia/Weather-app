@@ -13,6 +13,19 @@ const DetailsCard = (props) => {
 	const actualMeteoDescription = props.weather.weather[0].description;
 	const tempMin = props.weather.main.temp_min;
 	const tempMax = props.weather.main.temp_max;
+	const orario = props.weather.dt_txt;
+	const dateObject = new Date(orario);
+	// Ottenere il giorno della settimana (0 = Domenica, 1 = Lunedì, ..., 6 = Sabato)
+	const dayOfWeek = dateObject.toLocaleDateString("it-IT", {
+		weekday: "long",
+	});
+
+	// Ottenere l'ora e i minuti
+	const hours = dateObject.getHours();
+	const minutes = dateObject.getMinutes();
+	const dayOfMonth = dateObject.getDate();
+	console.log(`Giorno della settimana: ${dayOfWeek}`);
+	console.log(`Ora: ${hours}:${minutes}`);
 
 	useEffect(() => {
 		console.log(props);
@@ -24,14 +37,18 @@ const DetailsCard = (props) => {
 				<Col xs={12} md={10}>
 					<Card className="text-center">
 						<Card.Body className=" ">
-							<Card.Title className="fs-1">{city}</Card.Title>
+							<Card.Title className="fs-1 text-capitalize fw-bold">{`${dayOfWeek} ${dayOfMonth}`}</Card.Title>
 							<Card.Text>
+								{`Orario: ${hours}:00`}
 								<img
+									className="mx-auto"
 									src={`http://openweathermap.org/img/w/${props.weather.weather[0].icon}.png`}
 									alt="weather icon"
 								/>
 								<p className="m-0 fs-4">{actualMeteo}</p>
-								<p>{actualMeteoDescription}</p>
+								<p className=" text-capitalize">
+									{actualMeteoDescription}
+								</p>
 								<p className="fs-2">
 									<span
 										className="fs-6"

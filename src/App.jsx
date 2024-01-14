@@ -20,8 +20,11 @@ function App() {
 					path="/"
 					element={
 						<>
-							<Home />
-							{weather && <OverviewCard weather={weather} />}
+							{weather ? (
+								<OverviewCard weather={weather} />
+							) : (
+								<Home />
+							)}
 						</>
 					}
 				/>
