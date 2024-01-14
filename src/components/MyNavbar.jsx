@@ -6,10 +6,14 @@ function MyNavbar(props) {
 			name: "Home",
 			link: "/",
 		},
-		// {
-		// 	name: "Your City",
-		// 	link: "/your-city",
-		// },
+		{
+			name: "OpenWeather API",
+			link: "https://openweathermap.org/",
+		},
+		{
+			name: "My GitHub",
+			link: "https://github.com/FraLobbia",
+		},
 	];
 
 	return (
@@ -28,22 +32,33 @@ function MyNavbar(props) {
 					aria-controls="myNavbar"
 				/>
 
-				<Navbar.Collapse
-					id="myNavbar"
-					className="text-center justify-content-between ">
+				<Navbar.Collapse id="myNavbar" className="text-center">
 					<hr className="d-md-none" />
 
 					<Nav>
-						{navBarConfig.map((navItem, index) => {
-							return (
+						{navBarConfig.map((navItem, index) =>
+							index === 1 ? (
+								<>
+									<div className="vr"></div>
+									<NavLink
+										to={navItem.link}
+										key={`navItem-${index}`}
+										className="nav-link"
+										target={index > 0 ? "_blank" : ""}>
+										{console.log(index)}
+										{navItem.name}
+									</NavLink>
+								</>
+							) : (
 								<NavLink
 									to={navItem.link}
 									key={`navItem-${index}`}
-									className="nav-link">
+									className="nav-link"
+									target={index > 0 ? "_blank" : ""}>
 									{navItem.name}
 								</NavLink>
-							);
-						})}
+							)
+						)}
 					</Nav>
 				</Navbar.Collapse>
 			</Container>

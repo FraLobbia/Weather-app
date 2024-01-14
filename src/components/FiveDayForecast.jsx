@@ -4,7 +4,6 @@ import "slick-carousel/slick/slick-theme.css";
 import NextArrow from "./NextArrows";
 import PrevArrow from "./PrevArrow";
 import { Link, useParams } from "react-router-dom";
-import OverviewCard from "./OverviewCard";
 import { useEffect, useState } from "react";
 import { token } from "../assets/token";
 import DetailsCard from "./DetailsCard";

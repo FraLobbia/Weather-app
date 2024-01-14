@@ -16,6 +16,8 @@ $navbar-light-hover-color: white;
 $border-color: white;
 $border-radius: 0;
 $card-bg: rgba($body-bg, 0.5);
+// $navbar-padding-x: 2rem;
+// $navbar-nav-link-padding-x: 3rem;
 // 3. Include remainder of required Bootstrap stylesheets
 @import "../node_modules/bootstrap/scss/variables";
 @import "../node_modules/bootstrap/scss/variables-dark"; // senza questa da errore

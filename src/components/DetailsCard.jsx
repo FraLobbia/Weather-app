@@ -1,13 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
-import { useParams } from "react-router";
-import { token } from "../assets/token";
-import BackToHome from "./BackToHome";
-import FiveDayForecast from "./FiveDayForecast";
 
 const DetailsCard = (props) => {
-	const city = props.city;
 	const actualTemperature = props.weather.main.temp;
 	const actualMeteo = props.weather.weather[0].main;
 	const actualMeteoDescription = props.weather.weather[0].description;
@@ -22,14 +17,10 @@ const DetailsCard = (props) => {
 
 	// Ottenere l'ora e i minuti
 	const hours = dateObject.getHours();
-	const minutes = dateObject.getMinutes();
+	// const minutes = dateObject.getMinutes();
 	const dayOfMonth = dateObject.getDate();
-	console.log(`Giorno della settimana: ${dayOfWeek}`);
-	console.log(`Ora: ${hours}:${minutes}`);
 
-	useEffect(() => {
-		console.log(props);
-	}, []);
+	useEffect(() => {}, []);
 
 	return (
 		<Container>
