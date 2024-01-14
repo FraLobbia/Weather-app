@@ -7,12 +7,20 @@ function MyNavbar(props) {
 			link: "/",
 		},
 		{
+			name: "My Location",
+			link: "/my-location",
+		},
+		{
 			name: "OpenWeather API",
 			link: "https://openweathermap.org/",
 		},
 		{
 			name: "My GitHub",
 			link: "https://github.com/FraLobbia",
+		},
+		{
+			name: "My LinkedIn",
+			link: "https://www.linkedin.com/in/francesco-lobbia/",
 		},
 	];
 
@@ -28,24 +36,23 @@ function MyNavbar(props) {
 					/>
 				</Navbar.Brand>
 				<Navbar.Toggle
-					className="ms-auto me-2"
+					className="ms-auto me-5"
 					aria-controls="myNavbar"
 				/>
 
 				<Navbar.Collapse id="myNavbar" className="text-center">
 					<hr className="d-md-none" />
 
-					<Nav>
+					<Nav className=" align-items-center ">
 						{navBarConfig.map((navItem, index) =>
-							index === 1 ? (
+							index === 2 ? (
 								<>
-									<div className="vr"></div>
+									<div className="vr mx-3"></div>
 									<NavLink
 										to={navItem.link}
 										key={`navItem-${index}`}
-										className="nav-link"
-										target={index > 0 ? "_blank" : ""}>
-										{console.log(index)}
+										className="nav-link mx-1"
+										target={index > 1 ? "_blank" : ""}>
 										{navItem.name}
 									</NavLink>
 								</>
@@ -53,8 +60,12 @@ function MyNavbar(props) {
 								<NavLink
 									to={navItem.link}
 									key={`navItem-${index}`}
-									className="nav-link"
-									target={index > 0 ? "_blank" : ""}>
+									className={
+										index < 2
+											? "fs-3 nav-link mx-1"
+											: "nav-link mx-1"
+									}
+									target={index > 1 ? "_blank" : ""}>
 									{navItem.name}
 								</NavLink>
 							)

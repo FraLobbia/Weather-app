@@ -4,7 +4,7 @@ import OverviewCard from "./OverviewCard";
 import { token } from "../assets/token";
 import { useNavigate } from "react-router";
 
-const Search = (props) => {
+const MyLocation = (props) => {
 	const [searchQuery, setSearchQuery] = useState("");
 	// const navigate = useNavigate();
 
@@ -51,50 +51,60 @@ const Search = (props) => {
 		}
 	};
 
-	// useEffect(() => {
-	// 	if (navigator.geolocation) {
-	// 		navigator.geolocation.getCurrentPosition(
-	// 			(position) => {
-	// 				const latitude = position.coords.latitude;
-	// 				const longitude = position.coords.longitude;
-	// 				fetchWeather(latitude, longitude);
-	// 				fetchWeatherForecast(latitude, longitude);
-	// 				console.log(
-	// 					`Coordinate attuali: ${latitude}, ${longitude}`
-	// 				);
-	// 			},
-	// 			(error) => {
-	// 				console.error(
-	// 					`Errore durante l'ottenimento delle coordinate: ${error.message}`
-	// 				);
-	// 			}
-	// 		);
-	// 	} else {
-	// 		console.error("Geolocalizzazione non supportata dal tuo browser");
-	// 	}
-	// }, []);
+	useEffect(() => {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(
+				(position) => {
+					const latitude = position.coords.latitude;
+					const longitude = position.coords.longitude;
+					fetchWeather(latitude, longitude);
+					fetchWeatherForecast(latitude, longitude);
+					console.log(
+						`Coordinate attuali: ${latitude}, ${longitude}`
+					);
+				},
+				(error) => {
+					console.error(
+						`Errore durante l'ottenimento delle coordinate: ${error.message}`
+					);
+				}
+			);
+		} else {
+			console.error("Geolocalizzazione non supportata dal tuo browser");
+		}
+	}, []);
 
 	return (
-		<Container>
-			<Row className="flex-column align-items-center g-3">
-				<Col xs={12} md={4} className="text-center">
-					<Form.Group>
-						<Form.Control
-							type="search"
-							placeholder="Search a location"
-							value={searchQuery}
-							onKeyUp={(e) => {
-								if (e.key === "Enter") {
-									fetchCityData();
-								}
-							}}
-							onChange={(e) => setSearchQuery(e.target.value)}
-						/>
-					</Form.Group>
-				</Col>
-			</Row>
-		</Container>
+		<>
+			{props.weather && (
+				<>
+					<h1 className="text-center">
+						Attualmente ti trovi a {props.weather.name}
+					</h1>
+					<OverviewCard weather={props.weather} />
+				</>
+			)}
+		</>
+		// <Container>
+		// 	<Row className="flex-column align-items-center g-3">
+		// 		<Col xs={12} md={4} className="text-center">
+		// 			<Form.Group>
+		// 				<Form.Control
+		// 					type="search"
+		// 					placeholder="Search a location"
+		// 					value={searchQuery}
+		// 					onKeyUp={(e) => {
+		// 						if (e.key === "Enter") {
+		// 							fetchCityData();
+		// 						}
+		// 					}}
+		// 					onChange={(e) => setSearchQuery(e.target.value)}
+		// 				/>
+		// 			</Form.Group>
+		// 		</Col>
+		// 	</Row>
+		// </Container>
 	);
 };
 
-export default Search;
+export default MyLocation;

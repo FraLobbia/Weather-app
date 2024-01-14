@@ -55,13 +55,6 @@ const FiveDayForecast = (props) => {
 		prevArrow: <PrevArrow />,
 		responsive: [
 			{
-				breakpoint: 1200,
-				settings: {
-					slidesToShow: 3,
-					slidesToScroll: 3,
-				},
-			},
-			{
 				breakpoint: 1024,
 				settings: {
 					slidesToShow: 2,
@@ -70,13 +63,6 @@ const FiveDayForecast = (props) => {
 			},
 			{
 				breakpoint: 576,
-				settings: {
-					slidesToShow: 1,
-					slidesToScroll: 1,
-				},
-			},
-			{
-				breakpoint: 480,
 				settings: {
 					slidesToShow: 1,
 					slidesToScroll: 1,

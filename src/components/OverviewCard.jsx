@@ -12,7 +12,7 @@ const OverviewCard = (props) => {
 	return (
 		<Container className="mt-3">
 			<Row className=" justify-content-center">
-				<Col xs={12} md={6}>
+				<Col xs={12} md={10} lg={6}>
 					<Card className="text-center">
 						{/* <Card.Img variant="top" src="holder.js/100px180" /> */}
 						<Card.Body>
