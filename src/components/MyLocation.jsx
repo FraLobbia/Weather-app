@@ -3,9 +3,12 @@ import { Col, Container, Form, Row } from "react-bootstrap";
 import OverviewCard from "./OverviewCard";
 import { token } from "../assets/token";
 import { useNavigate } from "react-router";
-
+import { storeForecast, storeWeather } from "../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
 const MyLocation = (props) => {
 	const [searchQuery, setSearchQuery] = useState("");
+	const dispatch = useDispatch();
+
 	// const navigate = useNavigate();
 
 	const fetchCityData = async () => {
@@ -29,7 +32,8 @@ const MyLocation = (props) => {
 			const resp = await fetch(endpoint);
 			if (resp.ok) {
 				const response = await resp.json();
-				props.setWeather(response);
+				// props.setWeather(response);
+				dispatch(storeWeather(response));
 				console.log("dati weather", response);
 			}
 		} catch (error) {
@@ -43,7 +47,8 @@ const MyLocation = (props) => {
 			const resp = await fetch(endpoint);
 			if (resp.ok) {
 				const response = await resp.json();
-				props.setForecast(response);
+				// props.setForecast(response);
+				dispatch(storeForecast(response));
 				console.log("dati forecast", response);
 			}
 		} catch (error) {

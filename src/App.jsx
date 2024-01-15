@@ -8,9 +8,16 @@ import OverviewCard from "./components/OverviewCard";
 import FiveDayForecast from "./components/FiveDayForecast";
 import Home from "./components/Home";
 import MyLocation from "./components/MyLocation";
+import { useDispatch, useSelector } from "react-redux";
+
 function App() {
-	const [weather, setWeather] = useState(null);
-	const [forecast, setForecast] = useState(null);
+	// const [weather, setWeather] = useState(null);
+	// const [forecast, setForecast] = useState(null);
+
+	const dispatch = useDispatch();
+	const weather = useSelector((state) => state.weather);
+	const forecast = useSelector((state) => state.forecast);
+
 	return (
 		<BrowserRouter>
 			<MyNav logo={logo} />
@@ -19,12 +26,10 @@ function App() {
 					path="/"
 					element={
 						<>
-							<Search
-								setWeather={setWeather}
-								setForecast={setForecast}
-							/>
-							{weather ? (
-								<OverviewCard weather={weather} />
+							<Search />
+							{console.log(weather.weather)}
+							{weather.weather ? (
+								<OverviewCard weather={weather.weather} />
 							) : (
 								<Home />
 							)}
@@ -34,11 +39,13 @@ function App() {
 				<Route
 					path="/my-location"
 					element={
-						<MyLocation
-							setWeather={setWeather}
-							setForecast={setForecast}
-							weather={weather}
-						/>
+						<>
+							{weather.weather ? (
+								<MyLocation weather={weather.weather} />
+							) : (
+								<Home />
+							)}
+						</>
 					}
 				/>
 				<Route path="/:lat/:lon" element={<FiveDayForecast />} />

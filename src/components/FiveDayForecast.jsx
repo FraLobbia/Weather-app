@@ -7,10 +7,15 @@ import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { token } from "../assets/token";
 import DetailsCard from "./DetailsCard";
+import { useDispatch, useSelector } from "react-redux";
+import { storeForecast, storeWeather } from "../redux/actions";
 const FiveDayForecast = (props) => {
 	const { lat, lon } = useParams();
-	const [weather, setWeather] = useState(null);
-	const [forecast, setForecast] = useState(null);
+	// const [weather, setWeather] = useState(null);
+	// const [forecast, setForecast] = useState(null);
+	const dispatch = useDispatch();
+	const weather = useSelector((state) => state.weather);
+	const forecast = useSelector((state) => state.forecast);
 
 	const fetchWeather = async (lat, lon) => {
 		const endpoint = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${token}&units=metric&lang=it`;
@@ -18,7 +23,8 @@ const FiveDayForecast = (props) => {
 			const resp = await fetch(endpoint);
 			if (resp.ok) {
 				const response = await resp.json();
-				setWeather(response);
+				// setWeather(response);
+				dispatch(storeWeather(response));
 				console.log("dati weather", response);
 			}
 		} catch (error) {
@@ -32,7 +38,8 @@ const FiveDayForecast = (props) => {
 			const resp = await fetch(endpoint);
 			if (resp.ok) {
 				const response = await resp.json();
-				setForecast(response);
+				// setForecast(response);
+				dispatch(storeForecast(response));
 				console.log("dati forecast", response);
 			}
 		} catch (error) {

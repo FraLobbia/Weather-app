@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
-import OverviewCard from "./OverviewCard";
 import { token } from "../assets/token";
-import { useNavigate } from "react-router";
+import { storeForecast, storeWeather } from "../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 const Search = (props) => {
 	const [searchQuery, setSearchQuery] = useState("");
-	// const navigate = useNavigate();
+	const dispatch = useDispatch();
 
+	// ------------------------------------------------------  fetch ----------------------------------------------------------------------------------------------------------------------------
 	const fetchCityData = async () => {
 		const endpoint = `http://api.openweathermap.org/geo/1.0/direct?q=${searchQuery}&limit=5&appid=${token}`;
 		try {
@@ -29,7 +30,8 @@ const Search = (props) => {
 			const resp = await fetch(endpoint);
 			if (resp.ok) {
 				const response = await resp.json();
-				props.setWeather(response);
+				// props.setWeather(response);
+				dispatch(storeWeather(response));
 				console.log("dati weather", response);
 			}
 		} catch (error) {
@@ -43,36 +45,15 @@ const Search = (props) => {
 			const resp = await fetch(endpoint);
 			if (resp.ok) {
 				const response = await resp.json();
-				props.setForecast(response);
+				// props.setForecast(response);
+				dispatch(storeForecast(response));
 				console.log("dati forecast", response);
 			}
 		} catch (error) {
 			console.log(error);
 		}
 	};
-
-	// useEffect(() => {
-	// 	if (navigator.geolocation) {
-	// 		navigator.geolocation.getCurrentPosition(
-	// 			(position) => {
-	// 				const latitude = position.coords.latitude;
-	// 				const longitude = position.coords.longitude;
-	// 				fetchWeather(latitude, longitude);
-	// 				fetchWeatherForecast(latitude, longitude);
-	// 				console.log(
-	// 					`Coordinate attuali: ${latitude}, ${longitude}`
-	// 				);
-	// 			},
-	// 			(error) => {
-	// 				console.error(
-	// 					`Errore durante l'ottenimento delle coordinate: ${error.message}`
-	// 				);
-	// 			}
-	// 		);
-	// 	} else {
-	// 		console.error("Geolocalizzazione non supportata dal tuo browser");
-	// 	}
-	// }, []);
+	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	return (
 		<Container>
