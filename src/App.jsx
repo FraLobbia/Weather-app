@@ -27,26 +27,13 @@ function App() {
 					element={
 						<>
 							<Search />
-							{console.log(weather.weather)}
-							{weather.weather ? (
-								<OverviewCard weather={weather.weather} />
-							) : (
-								<Home />
-							)}
+							<OverviewCard weather={weather.weather} />
 						</>
 					}
 				/>
 				<Route
 					path="/my-location"
-					element={
-						<>
-							{weather.weather ? (
-								<MyLocation weather={weather.weather} />
-							) : (
-								<Home />
-							)}
-						</>
-					}
+					element={<MyLocation weather={weather.weather} />}
 				/>
 				<Route path="/:lat/:lon" element={<FiveDayForecast />} />
 			</Routes>

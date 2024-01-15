@@ -81,13 +81,15 @@ const MyLocation = (props) => {
 
 	return (
 		<>
-			{props.weather && (
+			{props.weather ? (
 				<>
 					<h1 className="text-center">
 						Attualmente ti trovi a {props.weather.name}
 					</h1>
 					<OverviewCard weather={props.weather} />
 				</>
+			) : (
+				<h1>sto caricando</h1>
 			)}
 		</>
 		// <Container>

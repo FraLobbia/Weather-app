@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick-theme.css";
 import NextArrow from "./NextArrows";
 import PrevArrow from "./PrevArrow";
 import { Link, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { token } from "../assets/token";
 import DetailsCard from "./DetailsCard";
 import { useDispatch, useSelector } from "react-redux";
