@@ -5,19 +5,17 @@ import NextArrow from "./NextArrows";
 import PrevArrow from "./PrevArrow";
 import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { token } from "../assets/token";
 import DetailsCard from "./DetailsCard";
 import { useDispatch, useSelector } from "react-redux";
-import { storeForecast, storeWeather } from "../redux/actions/actions";
 import { getForecast, getWeather } from "../redux/actions/fetches";
-const FiveDayForecast = (props) => {
+const FiveDayForecast = () => {
 	const { lat, lon } = useParams();
 	const dispatch = useDispatch();
 	const { forecast } = useSelector((state) => state.weather);
 
 	useEffect(() => {
-		getWeather(lat, lon);
-		getForecast(lat, lon);
+		dispatch(getWeather(lat, lon));
+		dispatch(getForecast(lat, lon));
 	}, []);
 
 	const settingsSlider = {
@@ -48,13 +46,11 @@ const FiveDayForecast = (props) => {
 
 	return (
 		<>
-			{props.forecast ? (
+			{forecast ? (
 				<>
-					<h1 className="text-center mt-4">
-						{props.forecast.city.name}
-					</h1>
+					<h1 className="text-center mt-4">{forecast.city.name}</h1>
 					<Slider {...settingsSlider} className="mt-5">
-						{props.forecast.list.map((range3hour) => (
+						{forecast.list.map((range3hour) => (
 							<Link to={`/`} key={range3hour.dt_txt}>
 								<DetailsCard weather={range3hour} />
 							</Link>

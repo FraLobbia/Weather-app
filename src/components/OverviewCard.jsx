@@ -4,7 +4,7 @@ import Home from "./Home";
 import { useSelector } from "react-redux";
 
 const OverviewCard = () => {
-	const { actualWeather, forecast } = useSelector((state) => state.weather);
+	const { actualWeather } = useSelector((state) => state.weather);
 	return (
 		<>
 			{actualWeather ? (
@@ -12,7 +12,6 @@ const OverviewCard = () => {
 					<Row className=" justify-content-center">
 						<Col xs={12} md={10} lg={6}>
 							<Card className="text-center">
-								{/* <Card.Img variant="top" src="holder.js/100px180" /> */}
 								<Card.Body>
 									<Card.Title className="fs-3">
 										{actualWeather.name}

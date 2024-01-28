@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import { Col, Container, Form, Row } from "react-bootstrap";
 import OverviewCard from "./OverviewCard";
 import { useDispatch, useSelector } from "react-redux";
 import { getForecast, getWeather } from "../redux/actions/fetches";
+import { DotLoader } from "react-spinners";
 const MyLocation = () => {
 	const dispatch = useDispatch();
-	const { actualWeather, forecast } = useSelector((state) => state.weather);
+	const { actualWeather } = useSelector((state) => state.weather);
 	useEffect(() => {
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(
@@ -39,7 +39,7 @@ const MyLocation = () => {
 					<OverviewCard />
 				</>
 			) : (
-				<h1>sto caricando</h1>
+				<DotLoader color="#FFD201" className="mx-auto mt-5" />
 			)}
 		</>
 	);

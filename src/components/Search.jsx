@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getCityData } from "../redux/actions/fetches";
 import { setQuery } from "../redux/actions/actions";
 
-const Search = (props) => {
+const Search = () => {
 	const dispatch = useDispatch();
 	const { query } = useSelector((state) => state.query);
 
@@ -16,7 +15,6 @@ const Search = (props) => {
 						<Form.Control
 							type="search"
 							placeholder="Search a location"
-							// value={searchQuery}
 							onKeyUp={(e) => {
 								if (e.key === "Enter") {
 									dispatch(getCityData(query));
