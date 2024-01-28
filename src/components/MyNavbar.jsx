@@ -1,5 +1,5 @@
 import { Nav, Container, Navbar } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { LinkContainer } from "react-router-bootstrap";
 function MyNavbar(props) {
 	const navBarConfig = [
 		{
@@ -25,7 +25,7 @@ function MyNavbar(props) {
 	];
 
 	return (
-		<Navbar expand="md">
+		<Navbar expand="md" collapseOnSelect>
 			<Container fluid className="p-0">
 				<Navbar.Brand href="#">
 					<img
@@ -46,26 +46,30 @@ function MyNavbar(props) {
 					<Nav className=" align-items-center ">
 						{navBarConfig.map((navItem, index) =>
 							index === 2 ? (
-								<NavLink
+								<LinkContainer
 									to={navItem.link}
-									key={`navItem-${index}`}
-									className="nav-link mx-1"
-									target={index > 1 ? "_blank" : ""}>
-									<div className="vr mx-3"></div>
-									{navItem.name}
-								</NavLink>
+									key={`navItem-${index}`}>
+									<Nav.Link
+										className="nav-link mx-1"
+										target={index > 1 ? "_blank" : ""}>
+										<div className="vr mx-3"></div>
+										{navItem.name}
+									</Nav.Link>
+								</LinkContainer>
 							) : (
-								<NavLink
+								<LinkContainer
 									to={navItem.link}
-									key={`navItem-${index}`}
-									className={
-										index < 2
-											? "fs-3 nav-link mx-1"
-											: "nav-link mx-1"
-									}
-									target={index > 1 ? "_blank" : ""}>
-									{navItem.name}
-								</NavLink>
+									key={`navItem-${index}`}>
+									<Nav.Link
+										className={
+											index < 2
+												? "fs-3 nav-link mx-1"
+												: "nav-link mx-1"
+										}
+										target={index > 1 ? "_blank" : ""}>
+										{navItem.name}
+									</Nav.Link>
+								</LinkContainer>
 							)
 						)}
 					</Nav>

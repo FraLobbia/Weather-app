@@ -1,5 +1,4 @@
 import { Card, Col, Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
 const OverviewCard = (props) => {
 	return (
@@ -44,11 +43,6 @@ const OverviewCard = (props) => {
 											</span>
 										</p>
 									</Card.Text>
-									<Link
-										to={`/${props.weather.coord.lat}/${props.weather.coord.lon}`}
-										className="btn btn-primary">
-										Dettagli prossimi 5 giorni
-									</Link>
 								</Card.Body>
 							</Card>
 						</Col>

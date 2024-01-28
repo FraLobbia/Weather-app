@@ -3,11 +3,14 @@ import Search from "../../components/Search";
 import "./home.scss";
 import OverviewCard from "../../components/OverviewCard";
 import { DotLoader } from "react-spinners";
+import FiveDayForecast from "../../components/FiveDayForecast";
 
 const Home = () => {
 	const { responseQuery } = useSelector((state) => state.query);
 	const isLoading = useSelector((state) => state.loading.loading);
-	const { actualWeather } = useSelector((state) => state.query.weatherQuery);
+	const { actualWeather, forecast } = useSelector(
+		(state) => state.query.weatherQuery
+	);
 
 	return (
 		<>
@@ -21,7 +24,10 @@ const Home = () => {
 					<p className="fs-3">Per cominciare cerca la tua città!</p>
 				</div>
 			) : (
-				<OverviewCard weather={actualWeather} />
+				<>
+					<OverviewCard weather={actualWeather} />
+					<FiveDayForecast forecast={forecast} />
+				</>
 			)}
 		</>
 	);

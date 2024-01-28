@@ -10,7 +10,7 @@ const InitialState = {
 		lat: null,
 		lon: null,
 	},
-	fetchPosition: false,
+	fetchMyPosition: false,
 	actualWeather: null,
 	forecast: null,
 };
@@ -28,7 +28,7 @@ const positionReducer = (state = InitialState, action) => {
 		case FETCH_POSITION:
 			return {
 				...state,
-				fetchPosition: action.payload,
+				fetchMyPosition: action.payload,
 			};
 		case STORE_WEATHER_MY_POSITION:
 			return {

@@ -36,7 +36,7 @@ export const storePosition = ({ lat, lon }) => ({
 	payload: { lat, lon },
 });
 
-export const fetchPosition = (boolean) => ({
+export const fetchMyPosition = (boolean) => ({
 	type: FETCH_POSITION,
 	payload: boolean,
 });

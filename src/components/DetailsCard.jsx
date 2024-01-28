@@ -3,11 +3,6 @@ import { Col, Container, Row } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 
 const DetailsCard = (props) => {
-	// const actualTemperature = props.weather.main.temp;
-	// const actualMeteo = props.weather.weather[0].main;
-	// const actualMeteoDescription = props.weather.weather[0].description;
-	// const tempMin = props.weather.main.temp_min;
-	// const tempMax = props.weather.main.temp_max;
 	const orario = props.weather.dt_txt;
 	const dateObject = new Date(orario);
 	// Ottenere il giorno della settimana (0 = Domenica, 1 = Lunedì, ..., 6 = Sabato)
@@ -24,7 +19,7 @@ const DetailsCard = (props) => {
 
 	return (
 		<Container>
-			<Row className=" justify-content-center">
+			<Row className="justify-content-center">
 				<Col xs={12} md={10}>
 					<Card className="text-center">
 						<Card.Body className=" ">

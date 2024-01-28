@@ -5,10 +5,13 @@ import OverviewCard from "../../components/OverviewCard";
 import { useDispatch, useSelector } from "react-redux";
 import { getForecast, getWeather } from "../../redux/actions/fetches";
 import { DotLoader } from "react-spinners";
-import { fetchPosition, storePosition } from "../../redux/actions/actions";
+import { fetchMyPosition, storePosition } from "../../redux/actions/actions";
+import FiveDayForecast from "../../components/FiveDayForecast";
 const MyLocation = () => {
 	const dispatch = useDispatch();
-	const { actualWeather } = useSelector((state) => state.actualPosition);
+	const { actualWeather, forecast } = useSelector(
+		(state) => state.actualPosition
+	);
 	useEffect(() => {
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(
@@ -20,12 +23,12 @@ const MyLocation = () => {
 							lon: position.coords.longitude,
 						})
 					);
-					await dispatch(fetchPosition(true));
+					await dispatch(fetchMyPosition(true));
 					const lat = position.coords.latitude;
 					const lon = position.coords.longitude;
 					await dispatch(getWeather(lat, lon));
 					await dispatch(getForecast(lat, lon));
-					dispatch(fetchPosition(false));
+					dispatch(fetchMyPosition(false));
 				},
 				(error) => {
 					console.error(
@@ -46,6 +49,7 @@ const MyLocation = () => {
 						Attualmente ti trovi a {actualWeather.name}
 					</h1>
 					<OverviewCard weather={actualWeather} />
+					<FiveDayForecast forecast={forecast} />
 				</>
 			) : (
 				<DotLoader color="#FFD201" className="mx-auto mt-5" />

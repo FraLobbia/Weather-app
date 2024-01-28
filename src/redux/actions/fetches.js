@@ -30,14 +30,14 @@ export const getCityData = (searchQuery) => {
 
 export const getWeather = (lat, lon) => {
 	return async (dispatch, getState) => {
-		const fetchPosition = getState().actualPosition.fetchPosition;
+		const fetchMyPosition = getState().actualPosition.fetchMyPosition;
 		const endpoint = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${token}&units=metric&lang=it`;
 		try {
 			const resp = await fetch(endpoint);
 
 			if (resp.ok) {
 				const response = await resp.json();
-				if (fetchPosition) {
+				if (fetchMyPosition) {
 					dispatch(storeWeatherMyPosition(response));
 				} else {
 					dispatch(storeWeather(response));
@@ -51,14 +51,14 @@ export const getWeather = (lat, lon) => {
 
 export const getForecast = (lat, lon) => {
 	return async (dispatch, getState) => {
-		const fetchPosition = getState().actualPosition.fetchPosition;
+		const fetchMyPosition = getState().actualPosition.fetchMyPosition;
 		const endpoint = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${token}&units=metric&lang=it`;
 		try {
 			const resp = await fetch(endpoint);
 
 			if (resp.ok) {
 				const response = await resp.json();
-				if (fetchPosition) {
+				if (fetchMyPosition) {
 					dispatch(storeForecastMyPosition(response));
 				} else {
 					dispatch(storeForecast(response));
