@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import OverviewCard from "./OverviewCard";
 import { useDispatch, useSelector } from "react-redux";

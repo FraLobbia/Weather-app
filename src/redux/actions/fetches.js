@@ -7,7 +7,7 @@ export const getCityData = (searchQuery) => {
 	return async (dispatch, getState) => {
 		dispatch(startLoading());
 
-		const endpoint = `http://api.openweathermap.org/geo/1.0/direct?q=${searchQuery}&limit=5&appid=${token}`;
+		const endpoint = `https://api.openweathermap.org/geo/1.0/direct?q=${searchQuery}&limit=5&appid=${token}`;
 		try {
 			const resp = await fetch(endpoint);
 			if (resp.ok) {
