@@ -1,32 +1,30 @@
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Home from "./Home";
-import { useSelector } from "react-redux";
 
-const OverviewCard = () => {
-	const { actualWeather } = useSelector((state) => state.weather);
+const OverviewCard = (props) => {
 	return (
 		<>
-			{actualWeather ? (
+			{props.weather ? (
 				<Container className="mt-3">
 					<Row className=" justify-content-center">
 						<Col xs={12} md={10} lg={6}>
 							<Card className="text-center">
+								{/* <Card.Img variant="top" src="holder.js/100px180" /> */}
 								<Card.Body>
 									<Card.Title className="fs-3">
-										{actualWeather.name}
+										{props.weather.name}
 									</Card.Title>
 									<Card.Text>
 										<img
-											src={`http://openweathermap.org/img/w/${actualWeather.weather[0].icon}.png`}
+											src={`http://openweathermap.org/img/w/${props.weather.weather[0].icon}.png`}
 											alt="weather icon"
 										/>
 										<p className="m-0 fs-4">
-											{actualWeather.weather[0].main}
+											{props.weather.weather[0].main}
 										</p>
 										<p>
 											{
-												actualWeather.weather[0]
+												props.weather.weather[0]
 													.description
 											}
 										</p>
@@ -34,20 +32,20 @@ const OverviewCard = () => {
 											<span
 												className="fs-6"
 												style={{ color: "#0033cc" }}>
-												{actualWeather.main.temp_min}°
+												{props.weather.main.temp_min}°
 											</span>
 											<span className="vr mx-2"></span>
-											{actualWeather.main.temp}°
+											{props.weather.main.temp}°
 											<span className="vr mx-2"></span>
 											<span
 												className="fs-6"
 												style={{ color: "#ff8533" }}>
-												{actualWeather.main.temp_max}°
+												{props.weather.main.temp_max}°
 											</span>
 										</p>
 									</Card.Text>
 									<Link
-										to={`/${actualWeather.coord.lat}/${actualWeather.coord.lon}`}
+										to={`/${props.weather.coord.lat}/${props.weather.coord.lon}`}
 										className="btn btn-primary">
 										Dettagli prossimi 5 giorni
 									</Link>
@@ -57,7 +55,7 @@ const OverviewCard = () => {
 					</Row>
 				</Container>
 			) : (
-				<Home />
+				<h2>ciao</h2>
 			)}
 		</>
 	);

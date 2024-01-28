@@ -1,23 +1,31 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import "./myLocation.scss";
 import { useEffect } from "react";
-import OverviewCard from "./OverviewCard";
+import OverviewCard from "../../components/OverviewCard";
 import { useDispatch, useSelector } from "react-redux";
-import { getForecast, getWeather } from "../redux/actions/fetches";
+import { getForecast, getWeather } from "../../redux/actions/fetches";
 import { DotLoader } from "react-spinners";
+import { fetchPosition, storePosition } from "../../redux/actions/actions";
 const MyLocation = () => {
 	const dispatch = useDispatch();
-	const { actualWeather } = useSelector((state) => state.weather);
+	const { actualWeather } = useSelector((state) => state.actualPosition);
 	useEffect(() => {
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(
-				(position) => {
-					const latitude = position.coords.latitude;
-					const longitude = position.coords.longitude;
-					dispatch(getWeather(latitude, longitude));
-					dispatch(getForecast(latitude, longitude));
-					console.log(
-						`Coordinate attuali: ${latitude}, ${longitude}`
+				async (position) => {
+					console.log(position);
+					dispatch(
+						storePosition({
+							lat: position.coords.latitude,
+							lon: position.coords.longitude,
+						})
 					);
+					await dispatch(fetchPosition(true));
+					const lat = position.coords.latitude;
+					const lon = position.coords.longitude;
+					await dispatch(getWeather(lat, lon));
+					await dispatch(getForecast(lat, lon));
+					dispatch(fetchPosition(false));
 				},
 				(error) => {
 					console.error(
@@ -37,7 +45,7 @@ const MyLocation = () => {
 					<h1 className="text-center">
 						Attualmente ti trovi a {actualWeather.name}
 					</h1>
-					<OverviewCard />
+					<OverviewCard weather={actualWeather} />
 				</>
 			) : (
 				<DotLoader color="#FFD201" className="mx-auto mt-5" />

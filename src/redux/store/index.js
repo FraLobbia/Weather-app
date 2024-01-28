@@ -1,14 +1,15 @@
 // src/store/index.js
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import weatherReducer from "../reducers/weatherReducer";
 import { loadingReducer } from "../reducers/loadingReducer";
 import queryReducer from "../reducers/queryReducer";
 
+import positionReducer from "../reducers/positionReducer";
+
 // qui assemblo nella variabile "rootReducer" tutti i reducer
 const rootReducer = combineReducers({
-	weather: weatherReducer,
 	loading: loadingReducer,
 	query: queryReducer,
+	actualPosition: positionReducer,
 });
 
 const store = configureStore({

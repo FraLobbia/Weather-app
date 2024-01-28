@@ -46,16 +46,14 @@ function MyNavbar(props) {
 					<Nav className=" align-items-center ">
 						{navBarConfig.map((navItem, index) =>
 							index === 2 ? (
-								<>
+								<NavLink
+									to={navItem.link}
+									key={`navItem-${index}`}
+									className="nav-link mx-1"
+									target={index > 1 ? "_blank" : ""}>
 									<div className="vr mx-3"></div>
-									<NavLink
-										to={navItem.link}
-										key={`navItem-${index}`}
-										className="nav-link mx-1"
-										target={index > 1 ? "_blank" : ""}>
-										{navItem.name}
-									</NavLink>
-								</>
+									{navItem.name}
+								</NavLink>
 							) : (
 								<NavLink
 									to={navItem.link}

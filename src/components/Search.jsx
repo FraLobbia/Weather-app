@@ -8,7 +8,7 @@ const Search = () => {
 	const { query } = useSelector((state) => state.query);
 
 	return (
-		<Container>
+		<Container className="my-3">
 			<Row className="flex-column align-items-center g-3">
 				<Col xs={12} md={4} className="text-center">
 					<Form.Group>
