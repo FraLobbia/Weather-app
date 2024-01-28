@@ -3,7 +3,7 @@ import { Col, Container, Form, Row } from "react-bootstrap";
 import OverviewCard from "./OverviewCard";
 import { token } from "../assets/token";
 import { useNavigate } from "react-router";
-import { storeForecast, storeWeather } from "../redux/actions";
+import { storeForecast, storeWeather } from "../redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
 const MyLocation = (props) => {
 	const [searchQuery, setSearchQuery] = useState("");
@@ -92,25 +92,6 @@ const MyLocation = (props) => {
 				<h1>sto caricando</h1>
 			)}
 		</>
-		// <Container>
-		// 	<Row className="flex-column align-items-center g-3">
-		// 		<Col xs={12} md={4} className="text-center">
-		// 			<Form.Group>
-		// 				<Form.Control
-		// 					type="search"
-		// 					placeholder="Search a location"
-		// 					value={searchQuery}
-		// 					onKeyUp={(e) => {
-		// 						if (e.key === "Enter") {
-		// 							fetchCityData();
-		// 						}
-		// 					}}
-		// 					onChange={(e) => setSearchQuery(e.target.value)}
-		// 				/>
-		// 			</Form.Group>
-		// 		</Col>
-		// 	</Row>
-		// </Container>
 	);
 };
 

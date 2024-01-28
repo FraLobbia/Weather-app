@@ -1,11 +1,13 @@
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Home from "./Home";
+import { useSelector } from "react-redux";
 
-const OverviewCard = (props) => {
+const OverviewCard = () => {
+	const { actualWeather, forecast } = useSelector((state) => state.weather);
 	return (
 		<>
-			{props.weather ? (
+			{actualWeather ? (
 				<Container className="mt-3">
 					<Row className=" justify-content-center">
 						<Col xs={12} md={10} lg={6}>
@@ -13,19 +15,19 @@ const OverviewCard = (props) => {
 								{/* <Card.Img variant="top" src="holder.js/100px180" /> */}
 								<Card.Body>
 									<Card.Title className="fs-3">
-										{props.weather.name}
+										{actualWeather.name}
 									</Card.Title>
 									<Card.Text>
 										<img
-											src={`http://openweathermap.org/img/w/${props.weather.weather[0].icon}.png`}
+											src={`http://openweathermap.org/img/w/${actualWeather.weather[0].icon}.png`}
 											alt="weather icon"
 										/>
 										<p className="m-0 fs-4">
-											{props.weather.weather[0].main}
+											{actualWeather.weather[0].main}
 										</p>
 										<p>
 											{
-												props.weather.weather[0]
+												actualWeather.weather[0]
 													.description
 											}
 										</p>
@@ -33,20 +35,20 @@ const OverviewCard = (props) => {
 											<span
 												className="fs-6"
 												style={{ color: "#0033cc" }}>
-												{props.weather.main.temp_min}°
+												{actualWeather.main.temp_min}°
 											</span>
 											<span className="vr mx-2"></span>
-											{props.weather.main.temp}°
+											{actualWeather.main.temp}°
 											<span className="vr mx-2"></span>
 											<span
 												className="fs-6"
 												style={{ color: "#ff8533" }}>
-												{props.weather.main.temp_max}°
+												{actualWeather.main.temp_max}°
 											</span>
 										</p>
 									</Card.Text>
 									<Link
-										to={`/${props.weather.coord.lat}/${props.weather.coord.lon}`}
+										to={`/${actualWeather.coord.lat}/${actualWeather.coord.lon}`}
 										className="btn btn-primary">
 										Dettagli prossimi 5 giorni
 									</Link>

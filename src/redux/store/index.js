@@ -1,8 +1,18 @@
 // src/store/index.js
-import { createStore, applyMiddleware } from "redux";
-import { thunk } from "redux-thunk";
-import rootReducer from "../reducers";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import weatherReducer from "../reducers/weatherReducer";
+import { loadingReducer } from "../reducers/loadingReducer";
+import queryReducer from "../reducers/queryReducer";
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+// qui assemblo nella variabile "rootReducer" tutti i reducer
+const rootReducer = combineReducers({
+	weather: weatherReducer,
+	loading: loadingReducer,
+	query: queryReducer,
+});
+
+const store = configureStore({
+	reducer: rootReducer,
+});
 
 export default store;
