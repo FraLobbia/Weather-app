@@ -1,64 +1,20 @@
-import { useEffect, useState } from "react";
-import { Col, Container, Form, Row } from "react-bootstrap";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect } from "react";
 import OverviewCard from "./OverviewCard";
-import { token } from "../assets/token";
-import { useNavigate } from "react-router";
-
-const MyLocation = (props) => {
-	const [searchQuery, setSearchQuery] = useState("");
-	// const navigate = useNavigate();
-
-	const fetchCityData = async () => {
-		const endpoint = `http://api.openweathermap.org/geo/1.0/direct?q=${searchQuery}&limit=5&appid=${token}`;
-		try {
-			const resp = await fetch(endpoint);
-			if (resp.ok) {
-				const response = await resp.json();
-				fetchWeather(response[0].lat, response[0].lon);
-				fetchWeatherForecast(response[0].lat, response[0].lon);
-				console.log("dati città", response);
-			}
-		} catch (error) {
-			console.log(error);
-		}
-	};
-
-	const fetchWeather = async (lat, lon) => {
-		const endpoint = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${token}&units=metric&lang=it`;
-		try {
-			const resp = await fetch(endpoint);
-			if (resp.ok) {
-				const response = await resp.json();
-				props.setWeather(response);
-				console.log("dati weather", response);
-			}
-		} catch (error) {
-			console.log(error);
-		}
-	};
-
-	const fetchWeatherForecast = async (lat, lon) => {
-		const endpoint = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${token}&units=metric&lang=it`;
-		try {
-			const resp = await fetch(endpoint);
-			if (resp.ok) {
-				const response = await resp.json();
-				props.setForecast(response);
-				console.log("dati forecast", response);
-			}
-		} catch (error) {
-			console.log(error);
-		}
-	};
-
+import { useDispatch, useSelector } from "react-redux";
+import { getForecast, getWeather } from "../redux/actions/fetches";
+import { DotLoader } from "react-spinners";
+const MyLocation = () => {
+	const dispatch = useDispatch();
+	const { actualWeather } = useSelector((state) => state.weather);
 	useEffect(() => {
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(
 				(position) => {
 					const latitude = position.coords.latitude;
 					const longitude = position.coords.longitude;
-					fetchWeather(latitude, longitude);
-					fetchWeatherForecast(latitude, longitude);
+					dispatch(getWeather(latitude, longitude));
+					dispatch(getForecast(latitude, longitude));
 					console.log(
 						`Coordinate attuali: ${latitude}, ${longitude}`
 					);
@@ -83,6 +39,8 @@ const MyLocation = (props) => {
 					</h1>
 					<OverviewCard weather={props.weather} />
 				</>
+			) : (
+				<h1>sto caricando</h1>
 			)}
 		</>
 		// <Container>

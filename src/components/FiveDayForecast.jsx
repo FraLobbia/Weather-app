@@ -4,45 +4,18 @@ import "slick-carousel/slick/slick-theme.css";
 import NextArrow from "./NextArrows";
 import PrevArrow from "./PrevArrow";
 import { Link, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { token } from "../assets/token";
+import { useEffect } from "react";
 import DetailsCard from "./DetailsCard";
-const FiveDayForecast = (props) => {
+import { useSelector } from "react-redux";
+import { getForecast, getWeather } from "../redux/actions/fetches";
+const FiveDayForecast = () => {
 	const { lat, lon } = useParams();
-	const [weather, setWeather] = useState(null);
-	const [forecast, setForecast] = useState(null);
-
-	const fetchWeather = async (lat, lon) => {
-		const endpoint = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${token}&units=metric&lang=it`;
-		try {
-			const resp = await fetch(endpoint);
-			if (resp.ok) {
-				const response = await resp.json();
-				setWeather(response);
-				console.log("dati weather", response);
-			}
-		} catch (error) {
-			console.log(error);
-		}
-	};
-
-	const fetchWeatherForecast = async (lat, lon) => {
-		const endpoint = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${token}&units=metric&lang=it`;
-		try {
-			const resp = await fetch(endpoint);
-			if (resp.ok) {
-				const response = await resp.json();
-				setForecast(response);
-				console.log("dati forecast", response);
-			}
-		} catch (error) {
-			console.log(error);
-		}
-	};
+	const { forecast } = useSelector((state) => state.weather);
 
 	useEffect(() => {
-		fetchWeather(lat, lon);
-		fetchWeatherForecast(lat, lon);
+		getWeather(lat, lon);
+		getForecast(lat, lon);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const settingsSlider = {
@@ -73,7 +46,7 @@ const FiveDayForecast = (props) => {
 
 	return (
 		<>
-			{weather && forecast && (
+			{forecast ? (
 				<>
 					<h1 className="text-center mt-4">{forecast.city.name}</h1>
 					<Slider {...settingsSlider} className="mt-5">

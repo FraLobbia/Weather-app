@@ -1,8 +1,7 @@
 import logo from "./logo.png";
-import "./assets/dist/css/style.min.css";
+import "./style.scss";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MyNav from "./components/MyNavbar";
-import { useState } from "react";
 import Search from "./components/Search";
 import OverviewCard from "./components/OverviewCard";
 import FiveDayForecast from "./components/FiveDayForecast";
