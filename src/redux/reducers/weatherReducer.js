@@ -8,9 +8,9 @@ const InitialState = {
 const weatherReducer = (state = InitialState, action) => {
 	switch (action.type) {
 		case STORE_WEATHER:
-			return { weather: action.payload };
+			return { ...state, actualWeather: action.payload };
 		case STORE_FORECAST:
-			return { forecast: action.payload };
+			return { ...state, forecast: action.payload };
 		default:
 			return state;
 	}
